@@ -1,281 +1,281 @@
-# AgentMemory 项目总结
+# AgentMemory Project Summary
 
-## 📊 项目概述
+## 📊 Project Overview
 
-AgentMemory 是一个 AI Agent 持久化工作记忆系统，通过整合三个优秀开源项目的核心能力，创造了一个全新的、功能强大的记忆管理系统。
+AgentMemory is an AI Agent persistent work memory system that creates a powerful new memory management system by integrating the core capabilities of three excellent open-source projects.
 
-## 🎯 项目背景
+## 🎯 Project Background
 
-**创新方法**: 跨项目整合  
-**日期**: 2026-02-18  
-**Issue**: [#跨项目整合] AgentMemory: AI Agent 持久化工作记忆系统
+**Innovation Method**: Cross-project Integration  
+**Date**: 2026-02-18  
+**Issue**: [#Cross-project Integration] AgentMemory: AI Agent Persistent Work Memory System
 
-### 整合的项目
+### Integrated Projects
 
-1. **obra/superpowers** (54K⭐) - Agentic skills 框架
-   - 贡献: Skill 编排能力
-   - 整合后: 记忆驱动的 skill 调度
+1. **obra/superpowers** (54K⭐) - Agentic skills framework
+   - Contribution: Skill orchestration capability
+   - After integration: Memory-driven skill scheduling
 
-2. **p2r3/convert** (1.2K⭐) - 万能文件转换器
-   - 贡献: 200+ 格式文件转换
-   - 整合后: 万能知识摄取管线
+2. **p2r3/convert** (1.2K⭐) - Universal file converter
+   - Contribution: 200+ format file conversion
+   - After integration: Universal knowledge ingestion pipeline
 
-3. **alibaba/zvec** (4.8K⭐) - 进程内向量数据库
-   - 贡献: 轻量高速向量检索
-   - 整合后: 语义记忆检索系统
+3. **alibaba/zvec** (4.8K⭐) - In-process vector database
+   - Contribution: Lightweight high-speed vector search
+   - After integration: Semantic memory retrieval system
 
-## ✨ 核心功能
+## ✨ Core Features
 
-### 1. 万能知识摄取管线
-- ✅ 支持 20+ 文件格式（TXT, MD, PDF, DOCX, XLSX, 代码文件等）
-- ✅ 自动转换为文本格式
-- ✅ 自动生成向量嵌入
-- ✅ 持久化存储
+### 1. Universal Knowledge Ingestion Pipeline
+- ✅ Supports 20+ file formats (TXT, MD, PDF, DOCX, XLSX, code files, etc.)
+- ✅ Automatic conversion to text format
+- ✅ Automatic generation of vector embeddings
+- ✅ Persistent storage
 
-### 2. 语义记忆检索
-- ✅ 基于向量相似度的检索
-- ✅ 支持过滤条件（类型、标签、来源）
-- ✅ 可配置相似度阈值
-- ✅ 跨会话持久化
+### 2. Semantic Memory Retrieval
+- ✅ Vector similarity-based retrieval
+- ✅ Supports filter conditions (type, tags, source)
+- ✅ Configurable similarity threshold
+- ✅ Cross-session persistence
 
-### 3. 经验驱动的 Skill 选择
-- ✅ 记录每次 skill 执行历史
-- ✅ 计算历史成功率
-- ✅ 智能推荐最佳 skill
-- ✅ 5 个内置 skill
+### 3. Experience-Driven Skill Selection
+- ✅ Records every skill execution history
+- ✅ Calculates historical success rate
+- ✅ Intelligently recommends best skill
+- ✅ 5 built-in skills
 
-### 4. 跨会话知识传递
-- ✅ 所有记忆持久化到磁盘
-- ✅ 自动加载历史记忆
-- ✅ 支持记忆导出和导入（通过文件系统）
+### 4. Cross-Session Knowledge Transfer
+- ✅ All memories persisted to disk
+- ✅ Automatically loads historical memories
+- ✅ Supports memory export and import (through file system)
 
-## 🏗️ 技术架构
+## 🏗️ Technical Architecture
 
-### 核心组件
+### Core Components
 
-1. **ConvertService** - 文件转换层
-   - 路径: `src/convert/service.ts`
-   - 功能: 20+ 格式转文本
-   - 特点: 统一接口、错误处理
+1. **ConvertService** - File Conversion Layer
+   - Path: `src/convert/service.ts`
+   - Function: 20+ formats to text
+   - Features: Unified interface, error handling
 
-2. **EmbeddingService** - 向量嵌入
-   - 路径: `src/vector/embeddings.ts`
-   - 模型: all-MiniLM-L6-v2 (本地)
-   - 特点: 自动降级到简单哈希嵌入
+2. **EmbeddingService** - Vector Embedding
+   - Path: `src/vector/embeddings.ts`
+   - Model: all-MiniLM-L6-v2 (local)
+   - Features: Automatic degradation to simple hash embedding
 
-3. **VectorStore** - 向量存储
-   - 路径: `src/vector/store.ts`
-   - 算法: 余弦相似度
-   - 持久化: JSON 文件
+3. **VectorStore** - Vector Storage
+   - Path: `src/vector/store.ts`
+   - Algorithm: Cosine similarity
+   - Persistence: JSON files
 
-4. **SkillManager** - 技能编排
-   - 路径: `src/skills/manager.ts`
-   - 功能: 注册、执行、追踪、推荐
-   - 内置技能: 5 个
+4. **SkillManager** - Skill Orchestration
+   - Path: `src/skills/manager.ts`
+   - Functions: Register, execute, track, recommend
+   - Built-in skills: 5
 
-5. **AgentMemory** - 核心协调器
-   - 路径: `src/core/memory.ts`
-   - 功能: 整合所有组件
-   - API: 简洁统一
+5. **AgentMemory** - Core Coordinator
+   - Path: `src/core/memory.ts`
+   - Functions: Integrates all components
+   - API: Simple and unified
 
-### 技术栈
+### Technology Stack
 
-- **语言**: TypeScript 5.3+
-- **运行时**: Node.js 16+
-- **嵌入模型**: @xenova/transformers
-- **文件解析**: pdf-parse, mammoth, xlsx
+- **Language**: TypeScript 5.3+
+- **Runtime**: Node.js 16+
+- **Embedding Model**: @xenova/transformers
+- **File Parsing**: pdf-parse, mammoth, xlsx
 - **CLI**: commander.js
-- **测试**: Jest
+- **Testing**: Jest
 
-## 📦 项目结构
+## 📦 Project Structure
 
 ```
 projects/2026-02-18-agent-memory/
 ├── src/
 │   ├── core/
-│   │   └── memory.ts              # AgentMemory 核心类
+│   │   └── memory.ts              # AgentMemory core class
 │   ├── convert/
-│   │   └── service.ts             # 文件转换服务
+│   │   └── service.ts             # File conversion service
 │   ├── vector/
-│   │   ├── store.ts               # 向量存储
-│   │   └── embeddings.ts          # 嵌入生成
+│   │   ├── store.ts               # Vector storage
+│   │   └── embeddings.ts          # Embedding generation
 │   ├── skills/
-│   │   ├── manager.ts             # 技能管理器
-│   │   └── builtin.ts             # 内置技能
+│   │   ├── manager.ts             # Skill manager
+│   │   └── builtin.ts             # Built-in skills
 │   ├── types/
-│   │   └── index.ts               # 类型定义
-│   ├── cli.ts                     # CLI 接口
-│   └── index.ts                   # 主入口
+│   │   └── index.ts               # Type definitions
+│   ├── cli.ts                     # CLI interface
+│   └── index.ts                   # Main entry point
 ├── examples/
-│   ├── basic.ts                   # 基础示例
-│   ├── skills.ts                  # 技能示例
-│   └── custom-skill.ts            # 自定义技能示例
+│   ├── basic.ts                   # Basic example
+│   ├── skills.ts                  # Skills example
+│   └── custom-skill.ts            # Custom skill example
 ├── tests/
-│   ├── convert.test.ts            # 转换测试
-│   └── vector.test.ts             # 向量测试
-├── README.md                      # 主文档
-├── EXAMPLES.md                    # 详细示例
-├── LICENSE                        # MIT 许可
-├── package.json                   # 依赖配置
-└── tsconfig.json                  # TypeScript 配置
+│   ├── convert.test.ts            # Conversion tests
+│   └── vector.test.ts             # Vector tests
+├── README.md                      # Main documentation
+├── EXAMPLES.md                    # Detailed examples
+├── LICENSE                        # MIT license
+├── package.json                   # Dependency configuration
+└── tsconfig.json                  # TypeScript configuration
 ```
 
-## 🧪 测试结果
+## 🧪 Test Results
 
-### 单元测试
-- ✅ **18/18** 测试通过
-- ✅ **2** 测试套件
-- ✅ 覆盖核心功能
+### Unit Tests
+- ✅ **18/18** tests passed
+- ✅ **2** test suites
+- ✅ Covers core functionality
 
-### 构建
-- ✅ TypeScript 编译成功
-- ✅ 无类型错误
-- ✅ 生成 dist/ 输出
+### Build
+- ✅ TypeScript compilation successful
+- ✅ No type errors
+- ✅ Generated dist/ output
 
-### 安全扫描
-- ✅ CodeQL: **0** 个警告
-- ✅ 无已知漏洞
-- ✅ 依赖安全
+### Security Scan
+- ✅ CodeQL: **0** warnings
+- ✅ No known vulnerabilities
+- ✅ Dependency security
 
-### 代码审查
-- ✅ 所有建议已修复
-- ✅ 改进错误处理
-- ✅ 移除不安全的类型断言
+### Code Review
+- ✅ All suggestions fixed
+- ✅ Improved error handling
+- ✅ Removed unsafe type assertions
 
-## 📊 实现状态
+## 📊 Implementation Status
 
-### Phase 1: 基础整合 ✅
-- [x] 项目结构
-- [x] TypeScript 配置
-- [x] 类型定义
+### Phase 1: Basic Integration ✅
+- [x] Project structure
+- [x] TypeScript configuration
+- [x] Type definitions
 
-### Phase 2: 文件转换 ✅
-- [x] ConvertService 实现
-- [x] 20+ 格式支持
-- [x] 错误处理优化
+### Phase 2: File Conversion ✅
+- [x] ConvertService implementation
+- [x] 20+ format support
+- [x] Error handling optimization
 
-### Phase 3: 向量存储 ✅
-- [x] VectorStore 实现
-- [x] 嵌入生成（含降级）
-- [x] 持久化
+### Phase 3: Vector Storage ✅
+- [x] VectorStore implementation
+- [x] Embedding generation (with fallback)
+- [x] Persistence
 
-### Phase 4: 技能系统 ✅
-- [x] SkillManager 实现
-- [x] 历史追踪
-- [x] 智能推荐
-- [x] 5 个内置技能
+### Phase 4: Skill System ✅
+- [x] SkillManager implementation
+- [x] Historical tracking
+- [x] Intelligent recommendation
+- [x] 5 built-in skills
 
-### Phase 5: 核心 API ✅
-- [x] AgentMemory 类
+### Phase 5: Core API ✅
+- [x] AgentMemory class
 - [x] Ingest/Recall API
-- [x] CLI 工具
+- [x] CLI tool
 
-### Phase 6: 文档 ✅
-- [x] README (详细)
+### Phase 6: Documentation ✅
+- [x] README (detailed)
 - [x] EXAMPLES.md
-- [x] 代码注释
+- [x] Code comments
 - [x] LICENSE
 
-### Phase 7: 测试 ✅
-- [x] 单元测试
-- [x] 集成测试
-- [x] 安全扫描
-- [x] 代码审查
+### Phase 7: Testing ✅
+- [x] Unit tests
+- [x] Integration tests
+- [x] Security scan
+- [x] Code review
 
-## 💡 创新点
+## 💡 Innovation Points
 
-### 1. 深度整合
-不是简单拼接，而是有机融合三个项目的能力：
-- Convert → Embeddings → VectorStore 形成完整管线
-- Skills + History → Recommendation 形成闭环
-- Memory + Skills 深度耦合
+### 1. Deep Integration
+Not simple concatenation, but organic fusion of three project capabilities:
+- Convert → Embeddings → VectorStore forms complete pipeline
+- Skills + History → Recommendation forms closed loop
+- Memory + Skills deeply coupled
 
-### 2. 智能降级
-- 嵌入模型不可用时自动降级
-- 依赖包缺失时给出清晰提示
-- 保证系统在各种环境下可用
+### 2. Intelligent Degradation
+- Automatic degradation when embedding model unavailable
+- Clear prompts when dependencies missing
+- Ensures system availability in various environments
 
-### 3. 经验学习
-- 不仅存储数据，还学习模式
-- 基于历史成功率推荐
-- 自我优化的系统
+### 3. Experience Learning
+- Not just storing data, but learning patterns
+- Recommendations based on historical success rate
+- Self-optimizing system
 
-### 4. 完全本地化
-- 无需外部 API
-- 所有处理在本地完成
-- 隐私保护
+### 4. Fully Localized
+- No external API needed
+- All processing done locally
+- Privacy protection
 
-## 🎯 应用场景
+## 🎯 Application Scenarios
 
-### 1. 新人上手
+### 1. New User Onboarding
 ```typescript
-// 一次性导入所有项目文档
+// Import all project documentation at once
 await memory.ingest('./docs/**/*.md');
-// Agent 立即拥有完整知识
+// Agent immediately has complete knowledge
 ```
 
-### 2. 持续学习
+### 2. Continuous Learning
 ```typescript
-// 记录每次操作经验
+// Record each operation experience
 await memory.executeSkill('code-review', '...');
-// 下次自动应用最佳方案
+// Next time automatically apply best approach
 ```
 
-### 3. 团队知识库
+### 3. Team Knowledge Base
 ```typescript
-// 共享团队经验
-await memory.ingestText('部署最佳实践...', {...});
-// 所有成员都能检索
+// Share team experience
+await memory.ingestText('Deployment best practices...', {...});
+// All members can retrieve
 ```
 
-## 📈 性能指标
+## 📈 Performance Metrics
 
-- **存储**: JSON 文件，轻量级
-- **检索**: 内存中余弦相似度，毫秒级
-- **嵌入**: 
-  - 真实模型: ~100ms/text
-  - 降级模式: <1ms/text
-- **转换**: 取决于文件大小
-  - 1MB 文本: ~100ms
+- **Storage**: JSON files, lightweight
+- **Retrieval**: In-memory cosine similarity, millisecond-level
+- **Embedding**: 
+  - Real model: ~100ms/text
+  - Fallback mode: <1ms/text
+- **Conversion**: Depends on file size
+  - 1MB text: ~100ms
   - 10MB PDF: ~1s
 
-## 🔮 未来规划
+## 🔮 Future Plans
 
-### Phase 3: 产品化 (待实现)
-- [ ] 记忆可视化 Dashboard
-- [ ] 导出/导入功能
-- [ ] 团队共享协议
-- [ ] 更多文件格式
-- [ ] 性能优化
+### Phase 3: Productization (To be implemented)
+- [ ] Memory visualization Dashboard
+- [ ] Export/import functionality
+- [ ] Team sharing protocol
+- [ ] More file formats
+- [ ] Performance optimization
 
-### 增强功能
-- [ ] 记忆压缩算法
-- [ ] 自动遗忘机制
-- [ ] 多语言支持
-- [ ] 分布式存储
+### Enhancement Features
+- [ ] Memory compression algorithm
+- [ ] Automatic forgetting mechanism
+- [ ] Multi-language support
+- [ ] Distributed storage
 
-## 🙏 致谢
+## 🙏 Acknowledgements
 
-- **obra/superpowers** - Skill 编排灵感
-- **p2r3/convert** - 文件转换架构
-- **alibaba/zvec** - 向量存储设计
-- **@xenova/transformers** - 本地嵌入模型
+- **obra/superpowers** - Skill orchestration inspiration
+- **p2r3/convert** - File conversion architecture
+- **alibaba/zvec** - Vector storage design
+- **@xenova/transformers** - Local embedding model
 
-## 📝 总结
+## 📝 Summary
 
-AgentMemory 成功实现了：
-1. ✅ 三个优秀项目的有机整合
-2. ✅ 完整的记忆管理系统
-3. ✅ 经验驱动的智能推荐
-4. ✅ 跨会话知识传递
-5. ✅ 完全本地化运行
-6. ✅ 良好的测试覆盖
-7. ✅ 清晰的文档和示例
+AgentMemory successfully achieved:
+1. ✅ Organic integration of three excellent projects
+2. ✅ Complete memory management system
+3. ✅ Experience-driven intelligent recommendations
+4. ✅ Cross-session knowledge transfer
+5. ✅ Fully localized operation
+6. ✅ Good test coverage
+7. ✅ Clear documentation and examples
 
-这是一个**可用、可靠、可扩展**的 AI Agent 记忆系统，为 Agent 赋予了"永不遗忘"的能力。
+This is a **usable, reliable, and extensible** AI Agent memory system, giving Agents the ability to "never forget".
 
 ---
 
-**项目状态**: ✅ 完成  
-**版本**: 1.0.0  
-**最后更新**: 2026-02-19
+**Project Status**: ✅ Complete  
+**Version**: 1.0.0  
+**Last Updated**: 2026-02-19

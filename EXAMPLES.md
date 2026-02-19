@@ -1,61 +1,61 @@
-# AgentMemory 使用示例
+# AgentMemory Usage Examples
 
-## 目录
+## Table of Contents
 
-1. [基础使用](#基础使用)
-2. [文件摄取](#文件摄取)
-3. [记忆检索](#记忆检索)
-4. [技能执行](#技能执行)
-5. [自定义技能](#自定义技能)
-6. [高级场景](#高级场景)
+1. [Basic Usage](#basic-usage)
+2. [File Ingestion](#file-ingestion)
+3. [Memory Retrieval](#memory-retrieval)
+4. [Skill Execution](#skill-execution)
+5. [Custom Skills](#custom-skills)
+6. [Advanced Scenarios](#advanced-scenarios)
 
 ---
 
-## 基础使用
+## Basic Usage
 
-### 初始化 AgentMemory
+### Initialize AgentMemory
 
 ```typescript
 import { AgentMemory } from 'agent-memory';
 
 const memory = new AgentMemory({
-  storagePath: '.agent-memory',      // 存储路径
-  embeddingModel: 'Xenova/all-MiniLM-L6-v2',  // 嵌入模型
-  maxMemories: 10000,                // 最大记忆数量
-  similarityThreshold: 0.5           // 相似度阈值
+  storagePath: '.agent-memory',      // Storage path
+  embeddingModel: 'Xenova/all-MiniLM-L6-v2',  // Embedding model
+  maxMemories: 10000,                // Maximum number of memories
+  similarityThreshold: 0.5           // Similarity threshold
 });
 
-// 必须先初始化
+// Must initialize first
 await memory.initialize();
 ```
 
 ---
 
-## 文件摄取
+## File Ingestion
 
-### 摄取单个文件
+### Ingest Single File
 
 ```typescript
-// 摄取 PDF 文档
+// Ingest PDF document
 await memory.ingest('./docs/architecture.pdf', {
   tags: ['documentation', 'architecture'],
   source: 'project-docs'
 });
 
-// 摄取 Excel 报表
+// Ingest Excel report
 await memory.ingest('./data/sales-report.xlsx', {
   tags: ['data', 'sales'],
   source: 'analytics'
 });
 
-// 摄取代码文件
+// Ingest code file
 await memory.ingest('./src/api/users.ts', {
   tags: ['code', 'api'],
   source: 'codebase'
 });
 ```
 
-### 批量摄取文件
+### Batch File Ingestion
 
 ```typescript
 const files = [
@@ -74,10 +74,10 @@ for (const file of files) {
 }
 ```
 
-### 直接摄取文本
+### Direct Text Ingestion
 
 ```typescript
-// 摄取会话内容
+// Ingest conversation content
 await memory.ingestText(
   'User asked about database optimization strategies',
   {
@@ -87,7 +87,7 @@ await memory.ingestText(
   }
 );
 
-// 摄取重要决策
+// Ingest important decision
 await memory.ingestText(
   'Decision: We will use PostgreSQL instead of MySQL for better JSON support',
   {
@@ -100,15 +100,15 @@ await memory.ingestText(
 
 ---
 
-## 记忆检索
+## Memory Retrieval
 
-### 基础检索
+### Basic Retrieval
 
 ```typescript
-// 简单查询
+// Simple query
 const results = await memory.recall('How to deploy the application?');
 
-// 遍历结果
+// Iterate through results
 results.forEach(result => {
   console.log(`Similarity: ${(result.similarity * 100).toFixed(1)}%`);
   console.log(`Content: ${result.entry.content}`);
@@ -117,25 +117,25 @@ results.forEach(result => {
 });
 ```
 
-### 高级检索
+### Advanced Retrieval
 
 ```typescript
-// 带过滤条件的检索
+// Retrieval with filter conditions
 const results = await memory.recall('database optimization', {
-  limit: 10,                    // 最多返回 10 条
-  threshold: 0.7,               // 相似度阈值 70%
+  limit: 10,                    // Return maximum 10 results
+  threshold: 0.7,               // Similarity threshold 70%
   filters: {
-    type: 'document',           // 只检索文档类型
-    tags: ['database'],         // 必须包含 database 标签
-    source: 'project-docs'      // 来源必须是 project-docs
+    type: 'document',           // Only retrieve document type
+    tags: ['database'],         // Must contain database tag
+    source: 'project-docs'      // Source must be project-docs
   }
 });
 ```
 
-### 多次检索组合
+### Multiple Retrieval Combination
 
 ```typescript
-// 检索多个相关主题
+// Retrieve multiple related topics
 const topics = ['authentication', 'authorization', 'security'];
 
 for (const topic of topics) {
@@ -149,33 +149,33 @@ for (const topic of topics) {
 
 ---
 
-## 技能执行
+## Skill Execution
 
-### 执行内置技能
+### Execute Built-in Skills
 
 ```typescript
-// 代码审查
+// Code review
 const reviewResult = await memory.executeSkill(
   'code-review',
   'Review the authentication module in src/auth/'
 );
 console.log(reviewResult.output);
 
-// 生成文档
+// Generate documentation
 const docResult = await memory.executeSkill(
   'doc-generation',
   'Generate API documentation for user endpoints'
 );
 console.log(docResult.output);
 
-// 生成测试
+// Generate tests
 const testResult = await memory.executeSkill(
   'test-generation',
   'Generate unit tests for the payment service'
 );
 console.log(testResult.output);
 
-// 数据库优化
+// Database optimization
 const dbResult = await memory.executeSkill(
   'db-optimization',
   'Optimize slow queries in the orders table'
@@ -183,13 +183,13 @@ const dbResult = await memory.executeSkill(
 console.log(dbResult.output);
 ```
 
-### 获取技能推荐
+### Get Skill Recommendations
 
 ```typescript
-// 根据问题获取推荐技能
+// Get recommended skills based on problem
 const recommendations = await memory.recommendSkills(
   'The application has performance issues',
-  3  // 返回前 3 个推荐
+  3  // Return top 3 recommendations
 );
 
 recommendations.forEach(rec => {
@@ -203,7 +203,7 @@ recommendations.forEach(rec => {
 });
 ```
 
-### 查看所有可用技能
+### View All Available Skills
 
 ```typescript
 const skills = memory.getSkills();
@@ -217,9 +217,9 @@ skills.forEach(skill => {
 
 ---
 
-## 自定义技能
+## Custom Skills
 
-### 创建简单技能
+### Create Simple Skill
 
 ```typescript
 import { Skill, SkillContext, SkillResult } from 'agent-memory';
@@ -229,10 +229,10 @@ const performanceAnalysisSkill: Skill = {
   name: 'Performance Analysis',
   description: 'Analyze application performance metrics',
   execute: async (context: SkillContext): Promise<SkillResult> => {
-    // 访问相关记忆
+    // Access relevant memories
     const memories = context.memories || [];
     
-    // 执行分析逻辑
+    // Execute analysis logic
     const analysis = {
       slowEndpoints: ['/api/users', '/api/orders'],
       avgResponseTime: '250ms',
@@ -253,17 +253,17 @@ const performanceAnalysisSkill: Skill = {
   }
 };
 
-// 注册技能
+// Register skill
 memory.registerSkill(performanceAnalysisSkill);
 
-// 使用技能
+// Use skill
 const result = await memory.executeSkill(
   'performance-analysis',
   'Analyze current application performance'
 );
 ```
 
-### 创建高级技能（使用记忆）
+### Create Advanced Skill (Using Memory)
 
 ```typescript
 const smartRefactorSkill: Skill = {
@@ -273,19 +273,19 @@ const smartRefactorSkill: Skill = {
   execute: async (context: SkillContext): Promise<SkillResult> => {
     const { query, memories } = context;
     
-    // 从历史记忆中学习
+    // Learn from historical memories
     const pastIssues = memories?.filter(m => 
       m.metadata.tags?.includes('refactoring')
     ) || [];
     
-    // 基于历史生成建议
+    // Generate suggestions based on history
     const suggestions = [
       'Extract complex method into smaller functions',
       'Apply dependency injection for better testability',
       'Use design patterns (Strategy pattern recommended)'
     ];
     
-    // 添加历史经验
+    // Add historical experience
     const historicalInsights = pastIssues.map(m => 
       m.content.substring(0, 100)
     );
@@ -306,16 +306,16 @@ memory.registerSkill(smartRefactorSkill);
 
 ---
 
-## 高级场景
+## Advanced Scenarios
 
-### 场景 1: 项目知识库
+### Scenario 1: Project Knowledge Base
 
 ```typescript
 async function buildProjectKnowledgeBase() {
   const memory = new AgentMemory({ storagePath: '.project-kb' });
   await memory.initialize();
   
-  // 摄取所有项目文档
+  // Ingest all project documentation
   const docFiles = [
     './README.md',
     './docs/architecture.md',
@@ -330,16 +330,16 @@ async function buildProjectKnowledgeBase() {
     });
   }
   
-  // 摄取代码注释和文档字符串
-  // (可以使用代码解析工具提取)
+  // Ingest code comments and docstrings
+  // (can use code parsing tools to extract)
   
-  // 现在可以查询任何项目相关问题
+  // Now can query any project-related questions
   const answer = await memory.recall('How do we handle authentication?');
   return answer;
 }
 ```
 
-### 场景 2: 持续学习的 Agent
+### Scenario 2: Continuously Learning Agent
 
 ```typescript
 class LearningAgent {
@@ -353,25 +353,25 @@ class LearningAgent {
     await this.memory.initialize();
   }
   
-  // 执行任务并记录经验
+  // Execute task and record experience
   async performTask(task: string) {
-    // 检索相关经验
+    // Retrieve relevant experience
     const pastExperience = await this.memory.recall(task, {
       filters: { type: 'experience' },
       limit: 5
     });
     
-    // 获取推荐技能
+    // Get recommended skills
     const recommendations = await this.memory.recommendSkills(task);
     const bestSkill = recommendations[0];
     
-    // 执行最佳技能
+    // Execute best skill
     const result = await this.memory.executeSkill(
       bestSkill.skill.id,
       task
     );
     
-    // 记录结果作为新经验
+    // Record result as new experience
     await this.memory.ingestText(
       `Task: ${task}\nSkill: ${bestSkill.skill.name}\nSuccess: ${result.success}`,
       {
@@ -385,13 +385,13 @@ class LearningAgent {
   }
 }
 
-// 使用
+// Usage
 const agent = new LearningAgent();
 await agent.init();
 await agent.performTask('Optimize database queries');
 ```
 
-### 场景 3: 团队知识共享
+### Scenario 3: Team Knowledge Sharing
 
 ```typescript
 async function setupTeamMemory() {
@@ -400,7 +400,7 @@ async function setupTeamMemory() {
   });
   await teamMemory.initialize();
   
-  // 成员 A 分享经验
+  // Member A shares experience
   await teamMemory.ingestText(
     'When deploying to K8s, always set resource limits to avoid OOM issues',
     {
@@ -410,7 +410,7 @@ async function setupTeamMemory() {
     }
   );
   
-  // 成员 B 分享经验
+  // Member B shares experience
   await teamMemory.ingestText(
     'For API rate limiting, use Redis with sliding window algorithm',
     {
@@ -420,7 +420,7 @@ async function setupTeamMemory() {
     }
   );
   
-  // 新成员 C 可以立即查询
+  // New member C can immediately query
   const deployment = await teamMemory.recall('How to deploy to kubernetes?');
   const rateLimit = await teamMemory.recall('How to implement rate limiting?');
   
@@ -428,14 +428,14 @@ async function setupTeamMemory() {
 }
 ```
 
-### 场景 4: 版本化记忆
+### Scenario 4: Versioned Memory
 
 ```typescript
 async function versionedMemory() {
   const memory = new AgentMemory();
   await memory.initialize();
   
-  // 记录不同版本的实现
+  // Record different version implementations
   await memory.ingestText(
     'v1.0: Authentication uses JWT with 1-hour expiry',
     {
@@ -454,12 +454,12 @@ async function versionedMemory() {
     }
   );
   
-  // 查询当前版本
+  // Query current version
   const current = await memory.recall('current authentication', {
     filters: { tags: ['v2.0'] }
   });
   
-  // 查询历史版本
+  // Query historical versions
   const historical = await memory.recall('authentication history', {
     filters: { tags: ['auth'] },
     limit: 10
@@ -471,67 +471,67 @@ async function versionedMemory() {
 
 ---
 
-## 命令行使用示例
+## Command Line Usage Examples
 
-### 基础命令
+### Basic Commands
 
 ```bash
-# 初始化
+# Initialize
 agent-memory init
 
-# 摄取文件
+# Ingest files
 agent-memory ingest ./README.md
 agent-memory ingest ./data/report.pdf --tags "report,2026" --source "analytics"
 
-# 检索记忆
+# Retrieve memories
 agent-memory recall "database configuration"
 agent-memory recall "deployment process" --limit 3 --threshold 0.7
 
-# 查看技能
+# View skills
 agent-memory skills
 
-# 执行技能
+# Execute skills
 agent-memory execute code-review "Review authentication module"
 agent-memory execute db-optimization "Slow query performance"
 
-# 获取推荐
+# Get recommendations
 agent-memory recommend "performance issues"
 
-# 查看统计
+# View statistics
 agent-memory stats
 
-# 清除记忆
+# Clear memories
 agent-memory clear
 ```
 
-### 实际工作流示例
+### Actual Workflow Example
 
 ```bash
-# 1. 项目上手
+# 1. Project onboarding
 agent-memory ingest ./docs/*.md
 agent-memory ingest ./README.md
 agent-memory recall "project architecture"
 
-# 2. 代码审查
+# 2. Code review
 agent-memory execute code-review "Review PR #123"
 agent-memory recall "code review findings"
 
-# 3. 性能优化
+# 3. Performance optimization
 agent-memory recommend "application is slow"
 agent-memory execute db-optimization "optimize user queries"
 
-# 4. 查看进度
+# 4. View progress
 agent-memory stats
 ```
 
 ---
 
-## 最佳实践
+## Best Practices
 
-### 1. 结构化标签
+### 1. Structured Tagging
 
 ```typescript
-// 使用一致的标签体系
+// Use consistent tagging system
 const tagScheme = {
   type: ['documentation', 'code', 'data', 'experience'],
   domain: ['frontend', 'backend', 'devops', 'data'],
@@ -544,10 +544,10 @@ await memory.ingestText(content, {
 });
 ```
 
-### 2. 上下文丰富化
+### 2. Context Enrichment
 
 ```typescript
-// 添加丰富的上下文信息
+// Add rich context information
 await memory.ingestText(content, {
   type: 'experience',
   tags: ['bug-fix', 'security'],
@@ -562,21 +562,21 @@ await memory.ingestText(content, {
 });
 ```
 
-### 3. 定期清理
+### 3. Regular Cleanup
 
 ```typescript
-// 实现记忆清理策略
+// Implement memory cleanup strategy
 async function pruneOldMemories() {
   const stats = await memory.getStats();
   
   if (stats.totalMemories > 10000) {
-    // 导出重要记忆
+    // Export important memories
     const important = await memory.recall('', {
       filters: { tags: ['important'] },
       limit: 1000
     });
     
-    // 清空并重新导入
+    // Clear and re-import
     await memory.clear();
     
     for (const result of important) {
@@ -591,4 +591,4 @@ async function pruneOldMemories() {
 
 ---
 
-更多示例请参考 `/examples` 目录中的代码文件。
+For more examples, please refer to the code files in the `/examples` directory.
