@@ -1,42 +1,42 @@
-# AgentMemory - AI Agent 持久化工作记忆系统
+# AgentMemory - AI Agent Persistent Work Memory System
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/typescript-5.3%2B-blue.svg)](https://www.typescriptlang.org)
 [![Node](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org)
 
-🧠 **让 AI Agent 拥有持久化、可检索、可转换的工作记忆系统**
+🧠 **Give AI Agents a persistent, retrievable, and transformable work memory system**
 
-## 📊 项目信息
+## 📊 Project Information
 
-**创新方法**: 跨项目整合  
-**灵感来源**: GitHub Trending 多项目组合  
-**整合项目**:
-- 🎯 [obra/superpowers](https://github.com/obra/superpowers) - Agentic skills 框架 (54K⭐)
-- 🔄 [p2r3/convert](https://github.com/p2r3/convert) - 万能文件转换器 (1.2K⭐)
-- 🔍 [alibaba/zvec](https://github.com/alibaba/zvec) - 进程内向量数据库 (4.8K⭐)
+**Innovation Method**: Cross-project Integration  
+**Inspiration Source**: GitHub Trending Multi-project Combination  
+**Integrated Projects**:
+- 🎯 [obra/superpowers](https://github.com/obra/superpowers) - Agentic skills framework (54K⭐)
+- 🔄 [p2r3/convert](https://github.com/p2r3/convert) - Universal file converter (1.2K⭐)
+- 🔍 [alibaba/zvec](https://github.com/alibaba/zvec) - In-process vector database (4.8K⭐)
 
-**日期**: 2026-02-18
+**Date**: 2026-02-18
 
 ---
 
-## 🎯 核心创新
+## 🎯 Core Innovation
 
-将三个优秀项目的能力整合，创造全新的 Agent 记忆系统：
+Integrate the capabilities of three excellent projects to create a brand new Agent memory system:
 
-| 来源项目 | 原能力 | 整合后的新能力 |
+| Source Project | Original Capability | New Capability After Integration |
 |---------|--------|---------------|
-| **superpowers** | Skill 编排、子 agent 分发 | **记忆驱动的 skill 调度** - 基于历史经验选择最佳 skill |
-| **convert** | 200+ 格式文件转换 | **万能知识摄取** - 任何文件格式 → 结构化知识 |
-| **zvec** | 轻量高速向量检索 | **语义记忆检索** - 毫秒级找到相关历史上下文 |
-| **新增** | - | **经验学习引擎** - 从成功/失败经历中积累智慧 |
+| **superpowers** | Skill orchestration, sub-agent dispatch | **Memory-driven skill scheduling** - Select best skill based on historical experience |
+| **convert** | 200+ format file conversion | **Universal knowledge ingestion** - Any file format → Structured knowledge |
+| **zvec** | Lightweight high-speed vector search | **Semantic memory retrieval** - Find relevant historical context in milliseconds |
+| **New** | - | **Experience learning engine** - Accumulate wisdom from success/failure experiences |
 
 ---
 
-## ✨ 核心功能
+## ✨ Core Features
 
-### 1. 万能知识摄取管线 🔄
+### 1. Universal Knowledge Ingestion Pipeline 🔄
 
-**任意格式 → 结构化知识 → 永久记忆**
+**Any Format → Structured Knowledge → Permanent Memory**
 
 ```typescript
 import { AgentMemory } from 'agent-memory';
@@ -44,43 +44,43 @@ import { AgentMemory } from 'agent-memory';
 const memory = new AgentMemory();
 await memory.initialize();
 
-// Agent 阅读 PDF 文档
+// Agent reads PDF documents
 await memory.ingest('architecture-design.pdf');
 
-// Agent 阅读 Excel 数据
+// Agent reads Excel data
 await memory.ingest('sales-report.xlsx');
 
-// Agent 阅读代码文件
+// Agent reads code files
 await memory.ingest('api-service.ts');
 
-// 之后任何时候都能检索
-const results = await memory.recall('数据库选型是什么?');
+// Can retrieve at any time later
+const results = await memory.recall('What is the database selection?');
 console.log(results[0].entry.content);
-// → "文档第23页: 推荐 PostgreSQL + Redis..."
+// → "Page 23 of document: Recommend PostgreSQL + Redis..."
 ```
 
-**支持的文件格式**:
-- 📄 文档: PDF, DOCX, TXT, MD
-- 📊 数据: CSV, JSON, YAML
-- 💻 代码: JS, TS, PY, JAVA, GO, RUST, C, C++
+**Supported File Formats**:
+- 📄 Documents: PDF, DOCX, TXT, MD
+- 📊 Data: CSV, JSON, YAML
+- 💻 Code: JS, TS, PY, JAVA, GO, RUST, C, C++
 - 🌐 Web: HTML, CSS, XML
 
-> **注意**: XLSX 格式支持已移除，因为 xlsx 包存在安全漏洞。请使用 CSV 格式替代，或先将 XLSX 转换为 CSV。详见 [SECURITY.md](SECURITY.md)
+> **Note**: XLSX format support has been removed due to security vulnerabilities in the xlsx package. Please use CSV format instead, or convert XLSX to CSV first. See [SECURITY.md](SECURITY.md)
 
-### 2. 经验驱动的 Skill 选择 🎯
+### 2. Experience-Driven Skill Selection 🎯
 
-**从历史中学习，自动选择最佳方案**
+**Learn from history, automatically select the best approach**
 
 ```typescript
-// Agent 第一次处理 Django 性能问题
-await memory.executeSkill('db-optimization', 'Django 项目慢了');
-// 成功率: 95%
+// Agent handles Django performance issue for the first time
+await memory.executeSkill('db-optimization', 'Django project is slow');
+// Success rate: 95%
 
-await memory.executeSkill('code-review', 'Django 项目慢了');
-// 成功率: 60%
+await memory.executeSkill('code-review', 'Django project is slow');
+// Success rate: 60%
 
-// 下次遇到类似问题，自动推荐最佳方案
-const recommendations = await memory.recommendSkills('Django 性能优化');
+// Next time encountering similar issues, automatically recommend the best approach
+const recommendations = await memory.recommendSkills('Django performance optimization');
 console.log(recommendations[0]);
 // {
 //   skill: { name: 'Database Optimization', ... },
@@ -90,86 +90,86 @@ console.log(recommendations[0]);
 // }
 ```
 
-**内置技能**:
-- ✅ **code-review** - 代码审查
-- 📝 **doc-generation** - 文档生成
-- 🧪 **test-generation** - 测试生成
-- 🗄️ **db-optimization** - 数据库优化
-- 🔧 **refactoring** - 代码重构
+**Built-in Skills**:
+- ✅ **code-review** - Code review
+- 📝 **doc-generation** - Documentation generation
+- 🧪 **test-generation** - Test generation
+- 🗄️ **db-optimization** - Database optimization
+- 🔧 **refactoring** - Code refactoring
 
-### 3. 跨会话知识传递 🔗
+### 3. Cross-Session Knowledge Transfer 🔗
 
-**一次学习，永久记忆**
+**Learn once, remember forever**
 
 ```typescript
-// 会话 1: Agent 学习项目部署流程
+// Session 1: Agent learns project deployment process
 await memory.ingestText(
-  '部署流程: 1. npm build 2. docker build 3. kubectl apply',
+  'Deployment process: 1. npm build 2. docker build 3. kubectl apply',
   { type: 'document', tags: ['deployment'] }
 );
 
-// 会话 2: Agent 自动检索相关记忆
-const memories = await memory.recall('如何部署项目?', { limit: 3 });
-// 无需重新学习，立即获得部署流程
+// Session 2: Agent automatically retrieves relevant memories
+const memories = await memory.recall('How to deploy the project?', { limit: 3 });
+// No need to relearn, immediately get deployment process
 
-// 会话 3: 结合历史经验给出更好建议
-const skills = await memory.recommendSkills('部署项目到生产环境');
-// 推荐基于历史成功经验的最佳实践
+// Session 3: Provide better advice based on historical experience
+const skills = await memory.recommendSkills('Deploy project to production');
+// Recommend best practices based on historical successful experiences
 ```
 
 ---
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 安装
+### Installation
 
 ```bash
-# 克隆项目
+# Clone the project
 git clone https://github.com/wuzeru/forge-workspace.git
 cd forge-workspace/projects/2026-02-18-agent-memory
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 构建项目
+# Build the project
 npm run build
 
-# 链接到全局（可选）
+# Link to global (optional)
 npm link
 ```
 
-### 基础使用
+### Basic Usage
 
-#### 命令行界面
+#### Command Line Interface
 
 ```bash
-# 初始化 AgentMemory
+# Initialize AgentMemory
 agent-memory init
 
-# 摄取文件
+# Ingest files
 agent-memory ingest ./docs/README.md
 agent-memory ingest ./data/report.pdf --tags "report,2026"
 
-# 检索记忆
-agent-memory recall "如何部署项目?"
+# Retrieve memories
+agent-memory recall "How to deploy the project?"
 
-# 查看可用技能
+# View available skills
 agent-memory skills
 
-# 执行技能
-agent-memory execute code-review "审查登录模块的安全性"
+# Execute a skill
+agent-memory execute code-review "Review security of login module"
 
-# 获取技能推荐
-agent-memory recommend "Django 性能优化"
+# Get skill recommendations
+agent-memory recommend "Django performance optimization"
 
-# 查看统计信息
+# View statistics
 agent-memory stats
 
-# 清除所有记忆
+# Clear all memories
 agent-memory clear
 ```
 
-#### 编程接口
+#### Programming Interface
 
 ```typescript
 import { AgentMemory } from 'agent-memory';
@@ -181,22 +181,22 @@ const memory = new AgentMemory({
   similarityThreshold: 0.5
 });
 
-// 初始化
+// Initialize
 await memory.initialize();
 
-// 摄取文件
+// Ingest file
 await memory.ingest('document.pdf', {
   tags: ['docs', 'important'],
   source: 'project-docs'
 });
 
-// 直接摄取文本
+// Directly ingest text
 await memory.ingestText('This is important information', {
   type: 'conversation',
   tags: ['meeting']
 });
 
-// 检索记忆
+// Retrieve memories
 const results = await memory.recall('important information', {
   limit: 5,
   threshold: 0.7,
@@ -206,13 +206,13 @@ const results = await memory.recall('important information', {
   }
 });
 
-// 执行技能
+// Execute a skill
 const result = await memory.executeSkill('code-review', 'Review login.ts');
 
-// 获取推荐
+// Get recommendations
 const recommendations = await memory.recommendSkills('optimize database');
 
-// 注册自定义技能
+// Register custom skill
 memory.registerSkill({
   id: 'custom-skill',
   name: 'Custom Skill',
@@ -225,19 +225,19 @@ memory.registerSkill({
   }
 });
 
-// 查看统计
+// View statistics
 const stats = await memory.getStats();
 console.log(stats);
 ```
 
 ---
 
-## 🎯 使用场景
+## 🎯 Use Cases
 
-### 场景 1: 新人 Agent 快速上手
+### Scenario 1: New Agent Quick Onboarding
 
 ```typescript
-// 将项目所有文档一次性摄取
+// Ingest all project documentation at once
 const docs = [
   './docs/README.md',
   './docs/architecture.md',
@@ -250,97 +250,97 @@ for (const doc of docs) {
   await memory.ingest(doc, { tags: ['onboarding'] });
 }
 
-// Agent 立即拥有完整项目知识
-const knowledge = await memory.recall('项目架构是什么?');
-// 可以立即开始工作
+// Agent immediately has complete project knowledge
+const knowledge = await memory.recall('What is the project architecture?');
+// Can start working immediately
 ```
 
-### 场景 2: 持续改进的开发助手
+### Scenario 2: Continuously Improving Development Assistant
 
 ```typescript
-// 记录每次 code review 反馈
+// Record every code review feedback
 await memory.ingestText(
-  'Code Review 反馈: 建议使用 try-catch 包裹异步操作',
+  'Code Review Feedback: Suggest using try-catch for async operations',
   { type: 'experience', tags: ['code-review', 'best-practice'] }
 );
 
-// 记录 bug fix 模式
+// Record bug fix patterns
 await memory.ingestText(
-  'Bug Fix: 空指针异常 - 添加 null 检查',
+  'Bug Fix: Null pointer exception - Add null checks',
   { type: 'experience', tags: ['bug-fix', 'null-safety'] }
 );
 
-// 下次遇到类似问题，自动应用历史最佳方案
-const similar = await memory.recall('异步操作错误处理');
-// 自动找到相关的最佳实践
+// Next time encountering similar issues, automatically apply historical best approaches
+const similar = await memory.recall('async operation error handling');
+// Automatically find relevant best practices
 ```
 
-### 场景 3: 团队知识共享
+### Scenario 3: Team Knowledge Sharing
 
 ```typescript
-// 团队成员 A 的经验
+// Team member A's experience
 await memory.ingestText(
-  '部署到 K8s: 需要先设置 imagePullSecrets',
+  'Deploy to K8s: Need to set imagePullSecrets first',
   { type: 'experience', tags: ['deployment', 'k8s'] }
 );
 
-// 团队成员 B 可以直接检索
-const deployment = await memory.recall('如何部署到 K8s?');
-// 无需重复踩坑
+// Team member B can directly retrieve
+const deployment = await memory.recall('How to deploy to K8s?');
+// No need to repeat mistakes
 ```
 
 ---
 
-## 🏗️ 技术架构
+## 🏗️ Technical Architecture
 
 ```
-[任意文件] → [ConvertService 转换层] → [文本/结构化数据]
+[Any File] → [ConvertService Conversion Layer] → [Text/Structured Data]
                                               ↓
-[VectorStore 向量库] ← [EmbeddingService] ← [知识块]
+[VectorStore Vector DB] ← [EmbeddingService] ← [Knowledge Blocks]
        ↓
-[SkillManager 技能引擎] ← [记忆检索] ← [当前上下文]
+[SkillManager Skill Engine] ← [Memory Retrieval] ← [Current Context]
        ↓
-[最佳 Skill 组合执行]
+[Execute Best Skill Combination]
 ```
 
-### 核心组件
+### Core Components
 
-#### 1. ConvertService - 文件转换层
-- 支持 18+ 文件格式（PDF, DOCX, CSV, 代码文件等）
-- 统一转换为文本格式
-- 保留结构化信息
-- 注意: XLSX 支持已移除（安全原因）
+#### 1. ConvertService - File Conversion Layer
+- Supports 18+ file formats (PDF, DOCX, CSV, code files, etc.)
+- Unified conversion to text format
+- Preserves structured information
+- Note: XLSX support removed (security reasons)
 
-#### 2. EmbeddingService - 向量嵌入
-- 使用 `@xenova/transformers` 本地生成
-- 模型: `all-MiniLM-L6-v2`
-- 无需外部 API，完全本地化
-- **Note**: 首次使用时会下载模型（约 23MB），需要网络连接
-- 如果模型下载失败，系统会自动使用简单的基于哈希的备用嵌入方案
+#### 2. EmbeddingService - Vector Embedding
+- Uses `@xenova/transformers` for local generation
+- Model: `all-MiniLM-L6-v2`
+- No external API needed, completely local
+- **Note**: Downloads model on first use (~23MB), requires internet connection
+- If model download fails, system automatically uses a simple hash-based fallback embedding approach
 
-#### 3. VectorStore - 向量存储
-- 本地进程内存储
-- 余弦相似度搜索
-- JSON 持久化
+#### 3. VectorStore - Vector Storage
+- Local in-process storage
+- Cosine similarity search
+- JSON persistence
 
-#### 4. SkillManager - 技能编排
-- 技能注册和执行
-- 历史追踪
-- 智能推荐
+#### 4. SkillManager - Skill Orchestration
+- Skill registration and execution
+- Historical tracking
+- Intelligent recommendations
 
-#### 5. AgentMemory - 核心协调器
-- 整合所有组件
-- 提供统一 API
-- 自动化工作流
+#### 5. AgentMemory - Core Coordinator
+- Integrates all components
+- Provides unified API
+- Automated workflow
 
 ---
 
-## 📋 API 文档
+## 📋 API Documentation
 
 ### AgentMemory
 
 #### `constructor(config?: AgentMemoryConfig)`
-创建 AgentMemory 实例
+Create AgentMemory instance
 
 ```typescript
 const memory = new AgentMemory({
@@ -352,62 +352,62 @@ const memory = new AgentMemory({
 ```
 
 #### `initialize(): Promise<void>`
-初始化系统（必须在使用前调用）
+Initialize the system (must be called before use)
 
 #### `ingest(filePath: string, options?: IngestionOptions): Promise<string>`
-摄取文件到记忆系统
+Ingest file into memory system
 
 #### `ingestText(text: string, metadata?: Partial<MemoryMetadata>): Promise<string>`
-直接摄取文本到记忆系统
+Directly ingest text into memory system
 
 #### `recall(query: string, options?: RecallOptions): Promise<MemoryRecallResult[]>`
-检索相关记忆
+Retrieve relevant memories
 
 #### `executeSkill(skillId: string, query: string): Promise<any>`
-执行特定技能
+Execute a specific skill
 
 #### `recommendSkills(query: string, limit?: number): Promise<SkillRecommendation[]>`
-获取技能推荐
+Get skill recommendations
 
 #### `registerSkill(skill: Skill): void`
-注册自定义技能
+Register a custom skill
 
 #### `getSkills(): Skill[]`
-获取所有可用技能
+Get all available skills
 
 #### `getStats(): Promise<MemoryStats>`
-获取记忆统计信息
+Get memory statistics
 
 #### `clear(): Promise<void>`
-清除所有记忆
+Clear all memories
 
 ---
 
-## 🧪 开发指南
+## 🧪 Development Guide
 
-### 本地开发
+### Local Development
 
 ```bash
-# 安装依赖
+# Install dependencies
 npm install
 
-# 开发模式（支持热重载）
+# Development mode (with hot reload)
 npm run dev
 
-# 构建项目
+# Build the project
 npm run build
 
-# 运行测试
+# Run tests
 npm test
 
-# 代码检查
+# Code linting
 npm run lint
 
-# 代码格式化
+# Code formatting
 npm run format
 ```
 
-### 添加自定义技能
+### Adding Custom Skills
 
 ```typescript
 import { Skill, SkillContext, SkillResult } from 'agent-memory';
@@ -417,10 +417,10 @@ const mySkill: Skill = {
   name: 'My Custom Skill',
   description: 'Does something amazing',
   execute: async (context: SkillContext): Promise<SkillResult> => {
-    // 访问相关记忆
+    // Access relevant memories
     const memories = context.memories;
     
-    // 执行技能逻辑
+    // Execute skill logic
     const output = {
       result: 'Success!',
       data: { /* ... */ }
@@ -436,33 +436,33 @@ const mySkill: Skill = {
   }
 };
 
-// 注册技能
+// Register the skill
 memory.registerSkill(mySkill);
 ```
 
 ---
 
-## 📂 项目结构
+## 📂 Project Structure
 
 ```
 agent-memory/
 ├── src/
 │   ├── core/
-│   │   └── memory.ts          # AgentMemory 核心类
+│   │   └── memory.ts          # AgentMemory core class
 │   ├── convert/
-│   │   └── service.ts         # 文件转换服务
+│   │   └── service.ts         # File conversion service
 │   ├── vector/
-│   │   ├── store.ts           # 向量存储
-│   │   └── embeddings.ts      # 嵌入生成
+│   │   ├── store.ts           # Vector storage
+│   │   └── embeddings.ts      # Embedding generation
 │   ├── skills/
-│   │   ├── manager.ts         # 技能管理器
-│   │   └── builtin.ts         # 内置技能
+│   │   ├── manager.ts         # Skill manager
+│   │   └── builtin.ts         # Built-in skills
 │   ├── types/
-│   │   └── index.ts           # 类型定义
-│   ├── cli.ts                 # CLI 接口
-│   └── index.ts               # 主入口
-├── examples/                  # 示例代码
-├── tests/                     # 测试文件
+│   │   └── index.ts           # Type definitions
+│   ├── cli.ts                 # CLI interface
+│   └── index.ts               # Main entry point
+├── examples/                  # Example code
+├── tests/                     # Test files
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -470,60 +470,60 @@ agent-memory/
 
 ---
 
-## 🔒 安全说明
+## 🔒 Security Notes
 
-### 依赖安全性
+### Dependency Security
 
-AgentMemory 努力使用安全的依赖包。请注意以下安全考虑：
+AgentMemory strives to use secure dependencies. Please note the following security considerations:
 
-#### XLSX 文件支持（可选）
+#### XLSX File Support (Optional)
 
-Excel 文件（.xlsx）支持通过 `xlsx` 包提供，该包目前存在已知的安全漏洞：
+Excel file (.xlsx) support is provided through the `xlsx` package, which currently has known security vulnerabilities:
 - **CVE**: Regular Expression Denial of Service (ReDoS)
 - **CVE**: Prototype Pollution
-- **影响版本**: < 0.20.2（修复版本尚未发布）
+- **Affected versions**: < 0.20.2 (fixed version not yet released)
 
-**当前状态**: xlsx 被标记为**可选依赖**
+**Current status**: xlsx is marked as an **optional dependency**
 
-**安全建议**:
-1. ⚠️ **仅在信任的环境中使用** XLSX 文件转换功能
-2. ✅ **验证输入**: 在处理前验证 XLSX 文件来源和内容
-3. ✅ **限制文件大小**: 设置合理的文件大小限制
-4. ✅ **沙箱环境**: 在隔离环境中处理不受信任的文件
-5. 💡 **替代方案**: 考虑使用 CSV 格式或其他安全的表格格式
+**Security recommendations**:
+1. ⚠️ **Use XLSX file conversion feature only in trusted environments**
+2. ✅ **Validate input**: Verify XLSX file source and content before processing
+3. ✅ **Limit file size**: Set reasonable file size limits
+4. ✅ **Sandbox environment**: Process untrusted files in isolated environments
+5. 💡 **Alternative**: Consider using CSV format or other secure spreadsheet formats
 
-**如何使用**:
+**How to use**:
 ```bash
-# 默认安装不包含 xlsx
+# Default installation does not include xlsx
 npm install
 
-# 如果需要 XLSX 支持，手动安装（风险自负）
+# If you need XLSX support, manually install (at your own risk)
 npm install xlsx
 
-# 或者不安装 xlsx，系统会给出清晰的错误提示
+# Or don't install xlsx, the system will give clear error messages
 ```
 
-**代码示例**（安全实践）:
+**Code example** (security best practices):
 ```typescript
 import * as fs from 'fs';
 import { AgentMemory } from 'agent-memory';
 
 const memory = new AgentMemory();
 
-// 在处理 XLSX 前进行验证
+// Validate before processing XLSX
 async function safeIngestXLSX(filePath: string) {
-  // 1. 检查文件大小
+  // 1. Check file size
   const stats = fs.statSync(filePath);
-  if (stats.size > 10 * 1024 * 1024) { // 10MB 限制
+  if (stats.size > 10 * 1024 * 1024) { // 10MB limit
     throw new Error('File too large');
   }
   
-  // 2. 验证文件来源
+  // 2. Validate file source
   if (!isTrustedSource(filePath)) {
     throw new Error('Untrusted file source');
   }
   
-  // 3. 在隔离环境中处理
+  // 3. Process in isolated environment
   try {
     await memory.ingest(filePath);
   } catch (error) {
@@ -532,102 +532,102 @@ async function safeIngestXLSX(filePath: string) {
 }
 ```
 
-### 其他安全最佳实践
+### Other Security Best Practices
 
-1. **定期更新依赖**: 运行 `npm audit` 检查已知漏洞
-2. **输入验证**: 始终验证用户输入和文件路径
-3. **最小权限**: 运行时使用最小必要权限
-4. **监控日志**: 记录异常行为和错误
+1. **Regular dependency updates**: Run `npm audit` to check for known vulnerabilities
+2. **Input validation**: Always validate user input and file paths
+3. **Minimum privileges**: Run with minimum necessary privileges
+4. **Monitor logs**: Log abnormal behavior and errors
 
-### 报告安全问题
+### Report Security Issues
 
-如果发现安全漏洞，请通过 GitHub Issues 报告，或直接联系维护者。
+If you discover a security vulnerability, please report it through GitHub Issues or contact the maintainers directly.
 
 ---
 
-## 🔗 整合对比
+## 🔗 Integration Comparison
 
-### 与原项目的区别
+### Differences from Original Projects
 
-| 维度 | 原项目 | AgentMemory |
+| Dimension | Original Projects | AgentMemory |
 |------|--------|-------------|
-| **superpowers** | 独立的 skill 框架 | **记忆驱动** 的 skill 选择 |
-| **convert** | 纯文件转换工具 | 转换 + **自动向量化** + 存储 |
-| **zvec** | 通用向量数据库 | 专为 Agent **记忆优化** 的向量存储 |
-| **新增** | - | **经验学习引擎** + **跨会话记忆** |
+| **superpowers** | Independent skill framework | **Memory-driven** skill selection |
+| **convert** | Pure file conversion tool | Conversion + **auto-vectorization** + storage |
+| **zvec** | General vector database | Vector storage **optimized for Agent memory** |
+| **New** | - | **Experience learning engine** + **cross-session memory** |
 
-### 核心创新点
+### Core Innovation Points
 
-1. ✅ **三位一体整合**: 不是简单拼接，而是深度融合
-2. ✅ **经验驱动**: Skill 选择基于历史成功率
-3. ✅ **零依赖外部服务**: 完全本地化运行
-4. ✅ **持久化记忆**: 跨会话知识传递
-5. ✅ **自动化管线**: 文件 → 转换 → 向量化 → 存储一气呵成
-
----
-
-## 🚧 实现状态
-
-### Phase 1: 基础整合 ✅
-- [x] Convert wrapper: 文件 → 文本管线
-- [x] Vector store: 本地向量存储
-- [x] Embedding service: 本地嵌入生成
-- [x] 基础记忆存取 API
-
-### Phase 2: 智能功能 ✅
-- [x] 经验驱动 skill 选择
-- [x] 跨会话知识传递
-- [x] Skill 执行历史追踪
-- [x] 智能推荐引擎
-
-### Phase 3: 产品化 🚧
-- [ ] 记忆可视化 Dashboard
-- [ ] 记忆导出/导入
-- [ ] 团队共享记忆
-- [ ] 更多文件格式支持
-- [ ] 性能优化
+1. ✅ **Trinity integration**: Not simple concatenation, but deep fusion
+2. ✅ **Experience-driven**: Skill selection based on historical success rate
+3. ✅ **Zero external dependencies**: Fully localized operation
+4. ✅ **Persistent memory**: Cross-session knowledge transfer
+5. ✅ **Automated pipeline**: File → Conversion → Vectorization → Storage in one go
 
 ---
 
-## 🤝 贡献指南
+## 🚧 Implementation Status
 
-欢迎贡献！特别欢迎：
+### Phase 1: Basic Integration ✅
+- [x] Convert wrapper: File → Text pipeline
+- [x] Vector store: Local vector storage
+- [x] Embedding service: Local embedding generation
+- [x] Basic memory access API
 
-- 🐛 Bug 修复
-- ✨ 新功能
-- 📝 文档改进
-- 🧪 测试用例
-- 🎨 新的内置技能
+### Phase 2: Intelligent Features ✅
+- [x] Experience-driven skill selection
+- [x] Cross-session knowledge transfer
+- [x] Skill execution history tracking
+- [x] Intelligent recommendation engine
 
----
-
-## 📄 开源协议
-
-MIT License - 详见 [LICENSE](LICENSE) 文件
-
----
-
-## 🙏 致谢
-
-- [obra/superpowers](https://github.com/obra/superpowers) - Skill 编排灵感
-- [p2r3/convert](https://github.com/p2r3/convert) - 文件转换能力
-- [alibaba/zvec](https://github.com/alibaba/zvec) - 向量存储架构
-- [@xenova/transformers](https://github.com/xenova/transformers.js) - 本地嵌入模型
+### Phase 3: Productization 🚧
+- [ ] Memory visualization Dashboard
+- [ ] Memory export/import
+- [ ] Team shared memory
+- [ ] More file format support
+- [ ] Performance optimization
 
 ---
 
-## 💡 为什么选这个创新方向？
+## 🤝 Contributing Guide
 
-1. **痛点明确**: AI Agent 都是"失忆"状态，每次对话都从零开始
-2. **整合有机**: 三个项目能力互补，组合后 1+1+1>3
-3. **技术可行**: 都是成熟技术，整合风险低
-4. **应用广泛**: 任何需要记忆的 Agent 场景都能用
-5. **差异化价值**:
-   - ✅ 完全本地化（vs 依赖外部 API）
-   - ✅ 经验驱动（vs 静态规则）
-   - ✅ 持久化记忆（vs 临时会话）
-   - ✅ 万能摄取（vs 单一格式）
+Contributions welcome! Especially:
+
+- 🐛 Bug fixes
+- ✨ New features
+- 📝 Documentation improvements
+- 🧪 Test cases
+- 🎨 New built-in skills
 
 ---
 
-**🚀 让每个 AI Agent 都拥有永不遗忘的智慧！**
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE) file for details
+
+---
+
+## 🙏 Acknowledgements
+
+- [obra/superpowers](https://github.com/obra/superpowers) - Skill orchestration inspiration
+- [p2r3/convert](https://github.com/p2r3/convert) - File conversion capabilities
+- [alibaba/zvec](https://github.com/alibaba/zvec) - Vector storage architecture
+- [@xenova/transformers](https://github.com/xenova/transformers.js) - Local embedding model
+
+---
+
+## 💡 Why This Innovation Direction?
+
+1. **Clear pain point**: AI Agents are "amnesiac", starting from scratch in every conversation
+2. **Organic integration**: Three projects complement each other, 1+1+1>3 when combined
+3. **Technical feasibility**: All mature technologies, low integration risk
+4. **Wide application**: Can be used in any Agent scenario requiring memory
+5. **Differentiated value**:
+   - ✅ Fully localized (vs relying on external APIs)
+   - ✅ Experience-driven (vs static rules)
+   - ✅ Persistent memory (vs temporary sessions)
+   - ✅ Universal ingestion (vs single format)
+
+---
+
+**🚀 Give every AI Agent the wisdom that never forgets!**
